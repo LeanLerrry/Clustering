@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: topic-clustering
+    env: docker
+    region: oregon  # or choose your preferred region
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_APP
+        value: src.api:app
+    dockerCommand: gunicorn --config gunicorn.conf.py src.api:app
